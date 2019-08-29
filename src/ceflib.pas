@@ -12319,8 +12319,8 @@ var
   exc: ustring;
 begin
   SetLength(args, argumentsCount);
-  for i := 0 to argumentsCount - 1 do
-    args[i] := TCefv8ValueRef.UnWrap(arguments[i]);
+  for i := 1 to argumentsCount do
+    args[Pred(i)] := TCefv8ValueRef.UnWrap(arguments[Pred(i)]);
 
   Result := -Ord(TCefv8HandlerOwn(CefGetObject(self)).Execute(
     CefString(name), TCefv8ValueRef.UnWrap(obj), args, ret, exc));

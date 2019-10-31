@@ -24,19 +24,26 @@ package DCEF_Rio;
 {$MINENUMSIZE 1}
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
+{$DEFINE VCL}
 {$ENDIF IMPLICITBUILDING}
 {$IMPLICITBUILD ON}
 
 requires
-  rtl,
+{$IF Defined(VCL)}
   vcl,
-  fmx;
+{$ELSEIF Defined(FMX)}
+  fmx,
+{$IFEND}
+  rtl;
 
 contains
   cefreg in 'cefreg.pas',
+{$IF Defined(VCL)}
+  cefvcl in '..\src\cefvcl.pas',
+{$ELSEIF Defined(FMX)}
   ceffmx in '..\src\ceffmx.pas',
+{$IFEND}
   cefgui in '..\src\cefgui.pas',
-  ceflib in '..\src\ceflib.pas',
-  cefvcl in '..\src\cefvcl.pas';
+  ceflib in '..\src\ceflib.pas';
 
 end.

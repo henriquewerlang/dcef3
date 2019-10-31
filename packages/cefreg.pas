@@ -8,19 +8,26 @@ procedure Register;
 
 implementation
 uses
-  Classes, cefvcl
-{$ifdef DELPHI16_UP}
-  ,ceffmx
-{$endif}
+  Classes,
+{$IF Defined(VCL)}
+  cefvcl
+{$ELSEIF Defined(FMX) and Defined(VCL)}
+    ,
+{$ELSEIF Defined(FMX)}
+  ceffmx
+{$IFEND}
   ;
 
 procedure Register;
 begin
   RegisterComponents('Chromium', [
+{$IF Defined(VCL)}
     TChromiumDevTools, TChromium, TChromiumOSR
-{$ifdef DELPHI16_UP}
-    ,TChromiumFMX
-{$endif}
+{$ELSEIF Defined(FMX) and Defined(VCL)}
+    ,
+{$ELSEIF Defined(FMX)}
+    TChromiumFMX
+{$IFEND}
     ]);
 end;
 

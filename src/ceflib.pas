@@ -7777,7 +7777,7 @@ type
 
   TCefCustomStreamReader = class(TCefBaseOwn, ICefCustomStreamReader)
   private
-    FStream: TSTream;
+    FStream: TStream;
     FOwned: Boolean;
   protected
     function read(ptr: Pointer; size, n: NativeUInt): NativeUInt; virtual;
@@ -12313,7 +12313,7 @@ end;
 
 function TCefCustomStreamReader.seek(offset: Int64; whence: Integer): Integer;
 begin
-  Result := FStream.seek(offset, whence);
+  Result := FStream.seek(offset, TSeekOrigin(whence));
 end;
 
 function TCefCustomStreamReader.tell: Int64;
